@@ -3,7 +3,7 @@
   overflow: hidden;
   background: var(--deep);
   color: var(--deep-ink);
-  padding: clamp(56px, 8vw, 96px) var(--gutter) 0;
+  padding: clamp(56px, 8vw, 96px) var(--gutter) calc(clamp(28px, 4vw, 56px) + env(safe-area-inset-bottom, 0px));
 }
 .top {
   display: flex;
@@ -53,12 +53,13 @@
 }
 .word {
   display: block;
-  margin: clamp(20px, 3vw, 40px) 0 -0.2em;
+  margin: clamp(20px, 3vw, 40px) 0 0;
+  padding-bottom: 0.08em;
   font-family: var(--serif);
   font-style: italic;
   font-weight: 500;
   font-size: clamp(90px, 22vw, 400px);
-  line-height: 0.85;
+  line-height: 1;
   letter-spacing: -0.04em;
   white-space: nowrap;
   user-select: none;
