@@ -85,6 +85,7 @@ const POUR: Record<"capsules" | "softgels", { land: [number, number]; up: number
   ],
 };
 const MOUTH: [number, number] = [300, 278];
+const STAND_SIDE = "M110 500 V560 A190 34 0 0 0 490 560 V500 Z";
 
 function Supplements({ product, uid }: { product: Product; uid: string }) {
   if (product.art.shape !== "capsules" && product.art.shape !== "softgels") return null;
@@ -152,6 +153,14 @@ export function ProductScene({ product, uid, priority }: ArtProps) {
           <stop offset=".45" stopColor="#fff" stopOpacity="0" />
           <stop offset="1" stopColor="#000" stopOpacity=".3" />
         </linearGradient>
+        <linearGradient id={`${uid}glint`} x1="0" x2="1">
+          <stop offset="0" stopColor="#fff" stopOpacity="0" />
+          <stop offset=".5" stopColor="#fff" stopOpacity=".55" />
+          <stop offset="1" stopColor="#fff" stopOpacity="0" />
+        </linearGradient>
+        <clipPath id={`${uid}side`}>
+          <path d={STAND_SIDE} />
+        </clipPath>
         <radialGradient id={`${uid}gel`} cx=".4" cy=".35" r=".8">
           <stop offset="0" stopColor="#FFD27A" />
           <stop offset=".6" stopColor="#E69A2E" />
@@ -159,9 +168,29 @@ export function ProductScene({ product, uid, priority }: ArtProps) {
         </radialGradient>
       </defs>
       <ellipse cx="300" cy="586" rx="250" ry="24" fill="#000" opacity=".3" filter={`url(#${uid}blur)`} />
-      <path d="M110 500 V560 A190 34 0 0 0 490 560 V500 Z" fill={`url(#${uid}stand)`} />
+      <path d={STAND_SIDE} fill={`url(#${uid}stand)`} />
+      <g clipPath={`url(#${uid}side)`}>
+        <rect className="m-glint" x="20" y="480" width="110" height="130" fill={`url(#${uid}glint)`} />
+      </g>
       <ellipse cx="300" cy="500" rx="190" ry="34" fill={lighten(from, 0.3)} />
       <ellipse cx="300" cy="500" rx="190" ry="34" fill="none" stroke="#fff" strokeOpacity=".35" />
+      {/* turntable: dots travel round the rim, light pulses out from the product */}
+      <ellipse
+        className="m-rim"
+        cx="300"
+        cy="500"
+        rx="176"
+        ry="29"
+        fill="none"
+        stroke="#fff"
+        strokeOpacity=".85"
+        strokeWidth="4"
+        strokeLinecap="round"
+        pathLength={480}
+        strokeDasharray="0.1 23.9"
+      />
+      <ellipse className="m-pulse" cx="300" cy="502" rx="88" ry="13" fill="none" stroke="#fff" strokeWidth="1.6" />
+      <ellipse className="m-pulse m-pulse2" cx="300" cy="502" rx="88" ry="13" fill="none" stroke="#fff" strokeWidth="1.2" />
       <ellipse cx="300" cy="504" rx="86" ry="11" fill="#000" opacity=".32" filter={`url(#${uid}blur)`} />
       <g transform="translate(155,91) scale(1.45)">
         <Artwork product={product} uid={`${uid}a`} />

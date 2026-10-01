@@ -89,3 +89,15 @@
 @keyframes m-ray{0%,12%{opacity:0;stroke-dashoffset:22}12.5%{opacity:1}24%{opacity:1;stroke-dashoffset:-78}24.5%,52%{opacity:0;stroke-dashoffset:22}52.5%{opacity:1}64%{opacity:1;stroke-dashoffset:-78}64.5%,100%{opacity:0;stroke-dashoffset:22}}
 @keyframes m-ref{0%,24%{opacity:0;stroke-dashoffset:22}24.5%{opacity:1}35%{opacity:1;stroke-dashoffset:-78}35.5%,64%{opacity:0;stroke-dashoffset:22}64.5%{opacity:1}75%{opacity:1;stroke-dashoffset:-78}75.5%,100%{opacity:0;stroke-dashoffset:22}}
 @keyframes m-shd{0%,22%{opacity:0;transform:scale(.94)}25%{opacity:1;transform:none}38%{opacity:0;transform:scale(1.05)}62%{opacity:0;transform:scale(.94)}65%{opacity:1;transform:none}78%,100%{opacity:0;transform:scale(1.05)}}
+
+/* the stand: a turntable. Dots circle the rim, a glint sweeps the side,
+   and light pulses out from under the product */
+.m-rim,.m-glint,.m-pulse{opacity:0}
+.m-pulse{transform-box:fill-box;transform-origin:50% 50%}
+.play .m-rim{animation:m-rim var(--mt) linear infinite}
+.play .m-glint{animation:m-glint calc(var(--mt) * 1.5) cubic-bezier(.45,0,.55,1) infinite}
+.play .m-pulse{animation:m-pulse var(--mt) cubic-bezier(.2,.6,.3,1) infinite both}
+.play .m-pulse2{animation-delay:calc(var(--mt) / 2)}
+@keyframes m-rim{from{opacity:1;stroke-dashoffset:0}to{opacity:1;stroke-dashoffset:-48}}
+@keyframes m-glint{0%{opacity:1;transform:translateX(0)}100%{opacity:1;transform:translateX(460px)}}
+@keyframes m-pulse{0%{opacity:0;transform:scale(1)}6%{opacity:.7}45%,100%{opacity:0;transform:scale(2.15)}}
