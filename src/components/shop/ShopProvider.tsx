@@ -24,6 +24,8 @@ interface Toast {
 }
 
 interface UiApi {
+  /** True when the server can deliver web orders (a notifier is configured). */
+  webOrders: boolean;
   drawerOpen: boolean;
   view: DrawerView;
   setView: (view: DrawerView) => void;
@@ -37,7 +39,7 @@ interface UiApi {
 const CartContext = createContext<CartApi | null>(null);
 const UiContext = createContext<UiApi | null>(null);
 
-export function ShopProvider({ children }: { children: ReactNode }) {
+export function ShopProvider({ children, webOrders }: { children: ReactNode; webOrders: boolean }) {
   const lines = useSyncExternalStore(cartStore.subscribe, cartStore.getSnapshot, cartStore.getServerSnapshot);
   const totals = useMemo(() => priceCart(lines), [lines]);
 
@@ -81,8 +83,8 @@ export function ShopProvider({ children }: { children: ReactNode }) {
     [lines, totals, add],
   );
   const ui = useMemo<UiApi>(
-    () => ({ drawerOpen, view, setView, openDrawer, closeDrawer, toast, notify, dismissToast }),
-    [drawerOpen, view, openDrawer, closeDrawer, toast, notify, dismissToast],
+    () => ({ webOrders, drawerOpen, view, setView, openDrawer, closeDrawer, toast, notify, dismissToast }),
+    [webOrders, drawerOpen, view, openDrawer, closeDrawer, toast, notify, dismissToast],
   );
 
   return (

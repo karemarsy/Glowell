@@ -61,7 +61,7 @@ interface CheckoutFormProps {
 
 export function CheckoutForm({ onBack, onPlaced }: CheckoutFormProps) {
   const { lines, totals, clear } = useCart();
-  const { notify } = useUi();
+  const { notify, webOrders } = useUi();
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [pending, setPending] = useState<Channel | null>(null);
   const whatsapp = Boolean(store.contact.whatsapp);
@@ -70,7 +70,7 @@ export function CheckoutForm({ onBack, onPlaced }: CheckoutFormProps) {
     event.preventDefault();
     if (pending || lines.length === 0) return;
     const submitter = (event.nativeEvent as SubmitEvent).submitter as HTMLButtonElement | null;
-    const channel: Channel = submitter?.value === "whatsapp" ? "whatsapp" : "web";
+    const channel: Channel = submitter?.value === "whatsapp" || (!webOrders && whatsapp) ? "whatsapp" : "web";
     const data = Object.fromEntries(new FormData(event.currentTarget)) as Record<string, string>;
 
     // Same rules as the server, so most mistakes are caught instantly.
@@ -150,15 +150,20 @@ export function CheckoutForm({ onBack, onPlaced }: CheckoutFormProps) {
       {/* Honeypot: hidden from people, irresistible to bots. */}
       <input type="text" name="website" tabIndex={-1} autoComplete="off" className="sr-only" aria-hidden="true" />
 
-      <button className="btn btn-block" type="submit" value="web" disabled={!!pending}>
-        {pending === "web" ? "Sending…" : "Place order"}
-      </button>
-      {whatsapp && (
-        <button className="btn btn-ghost btn-block" type="submit" value="whatsapp" disabled={!!pending}>
-          {pending === "whatsapp" ? "Opening WhatsApp…" : "Order on WhatsApp"}
+      {(webOrders || !whatsapp) && (
+        <button className="btn btn-block" type="submit" value="web" disabled={!!pending}>
+          {pending === "web" ? "Sending…" : "Place order"}
         </button>
       )}
-      <p className={styles.note}>Pay with MoMo or cash on delivery. We&apos;ll call to confirm before we send it.</p>
+      {whatsapp && (
+        <button className={`btn btn-block ${webOrders ? "btn-ghost" : ""}`} type="submit" value="whatsapp" disabled={!!pending}>
+          {pending === "whatsapp" ? "Opening WhatsApp…" : webOrders ? "Order on WhatsApp" : "Send order on WhatsApp"}
+        </button>
+      )}
+      <p className={styles.note}>
+        {webOrders ? "" : "Your order opens in WhatsApp, ready to send. "}
+        Pay with MoMo or cash on delivery. We&apos;ll call to confirm before we send it.
+      </p>
     </form>
   );
 }
