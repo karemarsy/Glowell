@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Glowell: skincare and vitamins, inside and out</title>
+<meta name="description" content="Glowell makes skincare and vitamins that work as one routine. Delivered across Rwanda, pay with MoMo.">
+<meta property="og:title" content="Glowell: glow, inside and out">
+<meta property="og:description" content="Skincare and vitamins that work as one routine. Delivered across Rwanda.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#5A1330">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='32' fill='%235A1330'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-family='Georgia,serif' font-style='italic' font-size='40' fill='%23F4F1EC'%3Eg%3C/text%3E%3C/svg%3E">
+<script>try{if(!matchMedia("(prefers-reduced-motion: reduce)").matches&&document.visibilityState==="visible")document.documentElement.classList.add("intro")}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..800;1,6..96,400..800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="nav" aria-label="Main">
+  <a class="pill brand" href="#top" aria-label="Glowell, back to top">Glowell</a>
+  <button class="pill bag" id="bag-btn" aria-label="Open bag">Bag <span class="cnt" id="bag-count">0</span></button>
+</nav>
+
+<main id="app">
+  <section class="hero" id="top">
+    <div id="bks"></div>
+    <div class="vig"></div>
+    <div class="glow" id="glow"></div>
+    <div class="hero-in">
+      <h1 class="hl" aria-label="Glow, inside and out."><span class="ln" aria-hidden="true"><span>Glow, inside</span></span><span class="ln" aria-hidden="true"><span>and out.</span></span></h1>
+      <div class="stage" aria-hidden="true"><div class="stage-in" id="stage"></div></div>
+      <div class="spot" id="spot" aria-live="polite">
+        <h2 class="sn" id="s-name"></h2>
+        <p class="sm" id="s-meta"></p>
+        <p class="so" id="s-one"></p>
+        <div class="row">
+          <span class="sp" id="s-price"></span>
+          <button class="btn" id="hero-add">Add to bag</button>
+          <button class="btn ghost" id="hero-more">Details</button>
+        </div>
+      </div>
+      <div class="idx" id="idx" role="tablist" aria-label="Featured products"></div>
+    </div>
+  </section>
+
+  <section id="shop" aria-labelledby="shop-title">
+    <div class="shop-head">
+      <div>
+        <h2 id="shop-title">The collection</h2>
+        <p>Skincare formulas and vitamins, made to work as one routine.</p>
+      </div>
+      <div class="ctrl">
+        <div class="seg" id="seg" role="group" aria-label="Filter products">
+          <button data-f="all" aria-pressed="true">All</button>
+          <button data-f="out" aria-pressed="false">Skincare</button>
+          <button data-f="in" aria-pressed="false">Vitamins</button>
+        </div>
+        <div class="arrows">
+          <button class="arr" id="prev" aria-label="Previous products">&larr;</button>
+          <button class="arr" id="next" aria-label="Next products">&rarr;</button>
+        </div>
+      </div>
+    </div>
+    <div class="rail" id="rail" tabindex="0" aria-label="Products, scroll sideways"></div>
+  </section>
+
+  <section class="pairs" id="pairs" aria-labelledby="pairs-title">
+    <h2 id="pairs-title">Better together</h2>
+    <p id="pairs-lede">Pair a topical formula with the vitamin that supports the same goal from within.</p>
+    <div id="pair-list"></div>
+  </section>
+
+  <section class="promise" aria-label="Our approach">
+    <p id="promise">Skin shows what you put on it and what you put in it. We make both halves of the routine, and keep every formula short.</p>
+  </section>
+
+  <footer class="foot">
+    <div class="foot-top">
+      <div>
+        <h2>New drops and offers, rarely.</h2>
+        <form class="news" id="news" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="newsletter">
+          <p hidden><label>Leave empty <input name="bot-field"></label></p>
+          <label class="sr" for="email">Email address</label>
+          <input id="email" name="email" type="email" required placeholder="you@email.com" autocomplete="email">
+          <button class="btn" type="submit">Subscribe</button>
+        </form>
+      </div>
+      <nav class="links" aria-label="Footer">
+        <a href="#shop">The collection</a>
+        <a href="#pairs">Better together</a>
+        <a id="f-wa" hidden target="_blank" rel="noopener">WhatsApp us</a>
+        <a id="f-mail" hidden>Email us</a>
+        <a href="#top">Back to top</a>
+      </nav>
+    </div>
+    <p class="legal"><span id="f-delivery"></span> Supplements are not intended to diagnose, treat or prevent any condition. Ask a doctor before use if you are pregnant, breastfeeding or taking medication.</p>
+    <span class="word" aria-hidden="true">Glowell</span>
+  </footer>
+</main>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="dr-title" inert>
+  <div class="dr-h">
+    <h2 id="dr-title">Your bag</h2>
+    <button class="x" id="dr-close" aria-label="Close bag">&times;</button>
+  </div>
+
+  <!-- 1. bag -->
+  <div class="view" id="v-bag">
+    <div class="ship">
+      <p id="ship-msg"></p>
+      <div class="bar"><i id="ship-fill"></i></div>
+    </div>
+    <ul class="lines" id="lines"></ul>
+    <div class="empty" id="empty">Your bag is empty. Add a formula or a vitamin to start.</div>
+    <div class="tots" id="tots">
+      <div><span>Subtotal</span><span id="t-sub"></span></div>
+      <div id="t-disc-row"><span>Pair discount</span><span id="t-disc"></span></div>
+      <div class="gt"><span>Total</span><span id="t-total"></span></div>
+      <button class="btn" id="checkout">Check out</button>
+    </div>
+  </div>
+
+  <!-- 2. checkout (a Netlify form: every order lands in your Netlify dashboard) -->
+  <form class="view co" id="v-co" name="order" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <input type="hidden" name="form-name" value="order">
+    <input type="hidden" name="order-id">
+    <input type="hidden" name="items">
+    <input type="hidden" name="total">
+    <p hidden><label>Leave empty <input name="bot-field"></label></p>
+    <button type="button" class="back" id="co-back">&larr; Back to bag</button>
+    <ul class="co-sum" id="co-sum"></ul>
+    <label class="fld"><span>Full name</span><input name="name" required autocomplete="name"></label>
+    <label class="fld"><span>Phone (MoMo number)</span><input name="phone" type="tel" required autocomplete="tel" placeholder="078 123 4567" pattern="[0-9+ ]{9,16}"></label>
+    <label class="fld"><span>Delivery address</span><textarea name="address" required placeholder="District, sector, street or a landmark"></textarea></label>
+    <label class="fld"><span>Email <small>(optional)</small></span><input name="email" type="email" autocomplete="email"></label>
+    <label class="fld"><span>Note <small>(optional)</small></span><textarea name="notes" placeholder="Delivery time, gift message…"></textarea></label>
+    <button class="btn" type="submit" id="co-place">Place order</button>
+    <button class="btn ghost" type="button" id="co-wa" hidden>Order on WhatsApp</button>
+    <p class="note">Pay with MoMo or cash on delivery. We'll call to confirm before we send it.</p>
+  </form>
+
+  <!-- 3. thank you -->
+  <div class="view done" id="v-done" hidden>
+    <p class="big">Murakoze!</p>
+    <p id="d-msg"></p>
+    <span class="oid" id="d-id"></span>
+    <p id="d-momo" hidden></p>
+    <a class="btn" id="d-momo-btn" hidden>Pay with MoMo</a>
+    <a class="btn" id="d-pay" hidden target="_blank" rel="noopener">Pay online</a>
+    <button class="btn ghost" type="button" id="d-close">Keep shopping</button>
+  </div>
+</aside>
+<div class="toast" id="toast" role="status" aria-live="polite"><span id="toast-msg"></span><button id="toast-act" hidden>View bag</button></div>
+
+<script src="store-config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
