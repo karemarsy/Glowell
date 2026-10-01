@@ -1,0 +1,14 @@
+.section {
+  padding: clamp(100px, 14vw, 210px) var(--gutter);
+}
+.section p {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(32px, 5.4vw, 84px);
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  max-width: 1120px;
+}
+.live span {
+  opacity: 0.16;
+}

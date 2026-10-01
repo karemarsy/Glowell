@@ -1,0 +1,39 @@
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(22px + env(safe-area-inset-bottom, 0px));
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  max-width: calc(100% - 28px);
+  min-height: 56px;
+  padding: 10px 12px 10px 22px;
+  border-radius: 999px;
+  background: var(--paper-ink);
+  color: var(--paper);
+  font-weight: 600;
+  font-size: 14px;
+  transform: translate(-50%, calc(100% + 60px));
+  visibility: hidden;
+  transition:
+    transform 0.6s var(--ease),
+    visibility 0s 0.6s;
+}
+.on {
+  transform: translate(-50%, 0);
+  visibility: visible;
+  transition:
+    transform 0.6s var(--ease),
+    visibility 0s;
+}
+.toast button {
+  min-height: 36px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 0;
+  background: var(--paper);
+  color: var(--paper-ink);
+  font-weight: 600;
+  font-size: 13px;
+}

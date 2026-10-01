@@ -1,0 +1,128 @@
+.section {
+  background: var(--deep);
+  color: var(--deep-ink);
+  padding: clamp(80px, 10vw, 150px) var(--gutter);
+}
+.section h2 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(42px, 6vw, 92px);
+  line-height: 1;
+  letter-spacing: -0.025em;
+}
+.lede {
+  margin-top: 14px;
+  font-size: 17px;
+  max-width: 50ch;
+  opacity: 0.85;
+}
+.pair {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: clamp(24px, 5vw, 80px);
+  align-items: center;
+  margin-top: clamp(48px, 7vw, 96px);
+  padding-top: clamp(32px, 4vw, 56px);
+  border-top: 1px solid rgb(255 255 255 / 0.16);
+}
+.tiles {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.tile {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 18px;
+  background: linear-gradient(160deg, var(--b1), var(--b2));
+  clip-path: inset(100% 0 0 0 round 18px);
+}
+.in .tile {
+  clip-path: inset(0 round 18px);
+  transition: clip-path 1.3s cubic-bezier(0.7, 0, 0.2, 1);
+}
+.in .tile + .tile {
+  transition-delay: 0.16s;
+}
+.tile svg {
+  position: absolute;
+  left: -10%;
+  bottom: -6%;
+  width: 120%;
+  height: auto;
+}
+.plus {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 2;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--deep-ink);
+  color: var(--deep);
+  font: 500 26px/1 var(--sans);
+}
+.copy h3 {
+  font: 500 clamp(30px, 3.6vw, 52px) / 1.04 var(--serif);
+  letter-spacing: -0.02em;
+}
+.copy p {
+  margin-top: 16px;
+  font-size: 17px;
+  max-width: 42ch;
+  opacity: 0.88;
+}
+.copy .items {
+  margin-top: 18px;
+  font-size: 14px;
+  font-weight: 600;
+  opacity: 0.8;
+}
+.price {
+  margin-top: 22px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 12px;
+  font: 600 34px/1 var(--serif);
+}
+.price s {
+  font: 500 18px/1 var(--sans);
+  opacity: 0.6;
+}
+.price small {
+  font: 600 14px/1 var(--sans);
+  opacity: 0.85;
+}
+.copy :global(.btn) {
+  margin-top: 22px;
+  --fg: #f1ece6;
+  --on: #17101c;
+}
+@media (scripting: none) {
+  .tile {
+    clip-path: inset(0 round 18px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tile {
+    clip-path: inset(0 round 18px);
+  }
+}
+@media (max-width: 900px) {
+  .pair {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 520px) {
+  .tile svg {
+    left: -14%;
+    width: 128%;
+  }
+}

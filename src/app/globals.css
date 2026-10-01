@@ -1,0 +1,145 @@
+@import "../styles/motion.css";
+
+:root {
+  --paper: #f4f1ec;
+  --paper-ink: #1b1420;
+  --deep: #17101c;
+  --deep-ink: #f1ece6;
+  --serif: var(--font-serif), "Didot", "Bodoni 72", Georgia, serif;
+  --sans: var(--font-sans), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --ease: cubic-bezier(0.22, 0.8, 0.2, 1);
+  --gutter: clamp(18px, 4vw, 64px);
+  --fg: #2b1604;
+  --on: #ffe9c2;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #120e16;
+    --paper-ink: #f1ece6;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #120e16;
+  --paper-ink: #f1ece6;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--paper-ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+h1,
+h2,
+h3,
+p,
+dl,
+dd,
+ul {
+  margin: 0;
+  padding: 0;
+}
+ul {
+  list-style: none;
+}
+a {
+  color: inherit;
+}
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+button:disabled {
+  opacity: 0.55;
+  cursor: progress;
+}
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+[hidden] {
+  display: none !important;
+}
+svg {
+  display: block;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Pill button used across the site. --fg / --on come from the context. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  padding: 0 28px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--fg);
+  color: var(--on);
+  font: 600 15px/1 var(--sans);
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  transition:
+    transform 0.35s var(--ease),
+    opacity 0.3s;
+}
+.btn:hover {
+  transform: translateY(-2px);
+}
+.btn:active {
+  transform: none;
+  opacity: 0.9;
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--fg);
+  box-shadow: inset 0 0 0 1.5px currentColor;
+}
+.btn-block {
+  width: 100%;
+}
+
+/* Product artwork fills whatever box it is placed in. */
+.art {
+  position: absolute;
+  inset: 0;
+}
+.art > svg {
+  width: 100%;
+  height: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
+}
