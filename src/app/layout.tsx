@@ -47,7 +47,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <head>
         <script dangerouslySetInnerHTML={{ __html: INTRO }} />
       </head>
-      <body>
+      {/* Browser extensions (ColorZilla, Grammarly…) add attributes to <body> before React loads. */}
+      <body suppressHydrationWarning>
         <ShopProvider>
           <div id="page">
             <Nav />
